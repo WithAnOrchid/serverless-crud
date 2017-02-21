@@ -2,15 +2,16 @@
 
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const uuid = require('uuid');
 
 module.exports = (event, callback) => {
   const data = JSON.parse(event.body);
 
-  data.id = event.pathParameters.id;
-  data.updatedAt = new Date().getTime();
+  data.id = uuid.v1();
+  data.processed_at = new Date().getTime();
 
   const params = {
-    TableName : 'todos',
+    TableName: 'readings',
     Item: data
   };
 

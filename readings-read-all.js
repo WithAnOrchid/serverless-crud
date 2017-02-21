@@ -5,16 +5,13 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports = (event, callback) => {
   const params = {
-    TableName: 'todos',
-    Key: {
-      id: event.pathParameters.id
-    }
+    TableName: 'readings',
   };
 
-  return dynamoDb.get(params, (error, data) => {
+  return dynamoDb.scan(params, (error, data) => {
     if (error) {
       callback(error);
     }
-    callback(error, data.Item);
+    callback(error, data.Items);
   });
 };
