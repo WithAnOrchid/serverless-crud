@@ -64,9 +64,6 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: id
-            AttributeType: S
-          -
             AttributeName: sensor_id
             AttributeType: S
           - 
