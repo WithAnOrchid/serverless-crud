@@ -44,7 +44,7 @@ functions:
     handler: handler.readSince
     events:
       - http:
-          path: readings/{epoch}
+          path: readings/{id}
           method: get
           cors: true
 
