@@ -40,6 +40,13 @@ functions:
           method: get
           cors: true
 
+  readSince:
+    handler: handler.readSince
+    events:
+      - http:
+          path: readings/{epoch}
+          method: get
+          cors: true
 
   update:
     handler: handler.update
