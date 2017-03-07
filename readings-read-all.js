@@ -6,6 +6,9 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports = (event, callback) => {
   console.log("Event: " + JSON.stringify(event));
 
+sensor_id = "";
+published_at = "";
+
   if (event.queryStringParameters !== null && event.queryStringParameters !== undefined) {
     if (event.queryStringParameters.sensor_id !== undefined && event.queryStringParameters.sensor_id !== null && event.queryStringParameters.name !== "") {
         console.log("Received sensor_id: " + event.queryStringParameters.sensor_id);
