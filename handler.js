@@ -2,6 +2,7 @@
 
 const readingsCreate = require('./readings-create.js');
 const readingsReadAll = require('./readings-read-all.js');
+const readingsReadAllOf = require('./readings-read-all-of.js');
 const readingsReadOne = require('./readings-read-one.js');
 const readingsReadSince = require('./readings-read-since.js');
 const readingsUpdate = require('./readings-update.js');
@@ -23,6 +24,20 @@ module.exports.create = (event, context, callback) => {
 
 module.exports.readAll = (event, context, callback) => {
   readingsReadAll(event, (error, result) => {
+    const response = {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*"
+      },
+      body: JSON.stringify(result),
+    };
+
+    context.succeed(response);
+  });
+};
+
+module.exports.readAllOf = (event, context, callback) => {
+  readingsReadAllOf(event, (error, result) => {
     const response = {
       statusCode: 200,
       headers: {

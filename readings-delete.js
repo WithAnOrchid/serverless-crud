@@ -7,7 +7,8 @@ module.exports = (event, callback) => {
   const params = {
     TableName : 'readings',
     Key: {
-      id: event.pathParameters.id
+      sensor_id: event.pathParameters.sensor_id,
+      published_at: event.pathParameters.published_at
     }
   };
 

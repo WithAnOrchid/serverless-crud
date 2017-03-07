@@ -6,7 +6,8 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports = (event, callback) => {
   const data = JSON.parse(event.body);
 
-  data.id = event.pathParameters.id;
+  data.sensor_id = event.pathParameters.sensor_id;
+  data.published_at = event.pathParameters.published_at;
   var timeInMs = Date.now();
   data.processed_at = timeInMs;
 

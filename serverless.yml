@@ -25,18 +25,32 @@ functions:
           path: readings
           method: post
           cors: true
+
   readAll:
     handler: handler.readAll
+    memory: 512
+    timeout: 10
     events:
       - http:
           path: readings
           method: get
           cors: true
+
+  readAllOf:
+    handler: handler.readAllOf
+    memory: 512
+    timeout: 5
+    events:
+      - http:
+          path: readings/{sensor_id}
+          method: get
+          cors: true
+
   readOne:
     handler: handler.readOne
     events:
       - http:
-          path: readings/{id}
+          path: readings/{sensor_id}/{published_at}
           method: get
           cors: true
 
@@ -44,7 +58,7 @@ functions:
     handler: handler.readSince
     events:
       - http:
-          path: readings/{id}
+          path: readings/{sensor_id}/{published_at}
           method: get
           cors: true
 
@@ -52,14 +66,14 @@ functions:
     handler: handler.update
     events:
       - http:
-          path: readings/{id}
+          path: readings/{sensor_id}/{published_at}
           method: put
           cors: true
   delete:
     handler: handler.delete
     events:
       - http:
-          path: readings/{id}
+          path: readings/{sensor_id}/{published_at}
           method: delete
           cors: true
 
@@ -85,6 +99,6 @@ resources:
             AttributeName: published_at
             KeyType: RANGE
         ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
         TableName: 'readings'
