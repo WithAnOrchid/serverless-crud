@@ -1,7 +1,7 @@
 'use strict';
 
 const readingsCreate = require('./readings-create.js');
-const readingsRead = require('./readings-read.js');
+const readingsReadAll = require('./readings-read-all.js');
 
 const readingsReadSince = require('./readings-read-since.js');
 const readingsUpdate = require('./readings-update.js');
@@ -21,8 +21,8 @@ module.exports.create = (event, context, callback) => {
   });
 };
 
-module.exports.read = (event, context, callback) => {
-  readingsRead(event, (error, result) => {
+module.exports.readAll = (event, context, callback) => {
+  readingsReadAll(event, (error, result) => {
     const response = {
       statusCode: 200,
       headers: {

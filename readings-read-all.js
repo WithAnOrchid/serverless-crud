@@ -21,7 +21,7 @@ module.exports = (event, callback) => {
   const params = {
     TableName: 'readings',
     Key: {
-      sensor_id: sensor_id,
+      sensor_id: sensor_id ,
       published_at: published_at
     }    
   };

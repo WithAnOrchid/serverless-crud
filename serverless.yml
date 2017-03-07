@@ -26,8 +26,8 @@ functions:
           method: post
           cors: true
 
-  read:
-    handler: handler.read
+  readAll:
+    handler: handler.readAll
     memory: 512
     timeout: 10
     events:
