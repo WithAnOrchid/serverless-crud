@@ -26,8 +26,8 @@ functions:
           method: post
           cors: true
 
-  readEntireTable:
-    handler: handler.readEntireTable
+  read:
+    handler: handler.read
     memory: 512
     timeout: 10
     events:
@@ -35,28 +35,6 @@ functions:
           path: readings
           method: get
           cors: true
-
-  readAllOf:
-    handler: handler.readAllOf
-    memory: 512
-    timeout: 5
-    events:
-      - http:
-          path: readings/{sensor_id}
-          method: get
-          cors: true
-
-  readOne:
-    handler: handler.readOne
-    events:
-      - http:
-          path: readings/{sensor_id}/{published_at}
-          method: get
-          cors: true
-          parameters:
-            paths:
-              sensor_id: true
-              published_at: true
 
   readSince:
     handler: handler.readSince

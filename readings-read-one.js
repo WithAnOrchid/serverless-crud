@@ -5,11 +5,11 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports = (event, callback) => {
   console.log(event);
-  const params = {
-    TableName: 'readings',
-    Key: {
-      sensor_id: event.pathParameters.sensor_id,
-      published_at: event.pathParameters.published_at
+  var params = {
+    "TableName": 'readings',
+    "Key": {
+      "sensor_id": event.pathParameters.sensor_id ,
+      "published_at": event.pathParameters.published_at
     }
   };
 
