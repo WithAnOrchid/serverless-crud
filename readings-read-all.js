@@ -5,6 +5,9 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports = (event, callback) => {
   console.log("Event: " + JSON.stringify(event));
+  params = {
+    TableName: 'readings'    
+  };
 
   if (event.queryStringParameters !== null && event.queryStringParameters !== undefined) {
     if (event.queryStringParameters.sensor_id !== undefined && event.queryStringParameters.sensor_id !== null && event.queryStringParameters.name !== "") {
@@ -14,30 +17,27 @@ module.exports = (event, callback) => {
             console.log("Received http published_at: " + event.queryStringParameters.published_at);
             published_at = event.queryStringParameters.published_at;
 
-              const params = {
+              params = {
                 TableName: 'readings',
                 Key: {
                   sensor_id: sensor_id ,
                   published_at: published_at
                 }    
               };
-
-                console.log("params: " + JSON.stringify(params));
             }
         }
 
   }
   else
   {
-      const params = {
+      params = {
     TableName: 'readings'    
   };
 
-    console.log("params: " + JSON.stringify(params));
   }        
 
 
-
+  console.log("params: " + JSON.stringify(params));
   return dynamoDb.scan(params, (error, data) => {
     if (error) {
       callback(error);
