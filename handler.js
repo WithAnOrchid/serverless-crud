@@ -1,7 +1,7 @@
 'use strict';
 
 const readingsCreate = require('./readings-create.js');
-const readingsReadAll = require('./readings-read-all.js');
+const readingsReadEntireTable = require('./readings-read-entire-table.js');
 const readingsReadAllOf = require('./readings-read-all-of.js');
 const readingsReadOne = require('./readings-read-one.js');
 const readingsReadSince = require('./readings-read-since.js');
@@ -22,8 +22,8 @@ module.exports.create = (event, context, callback) => {
   });
 };
 
-module.exports.readAll = (event, context, callback) => {
-  readingsReadAll(event, (error, result) => {
+module.exports.readEntireTable = (event, context, callback) => {
+  readingsReadEntireTable(event, (error, result) => {
     const response = {
       statusCode: 200,
       headers: {
