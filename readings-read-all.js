@@ -21,6 +21,8 @@ module.exports = (event, callback) => {
                   published_at: published_at
                 }    
               };
+
+                console.log("params: " + JSON.stringify(params));
             }
         }
 
@@ -30,10 +32,11 @@ module.exports = (event, callback) => {
       const params = {
     TableName: 'readings'    
   };
+
+    console.log("params: " + JSON.stringify(params));
   }        
 
 
-  console.log("params: " + JSON.stringify(params));
 
   return dynamoDb.scan(params, (error, data) => {
     if (error) {
