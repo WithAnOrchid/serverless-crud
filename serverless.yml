@@ -53,6 +53,10 @@ functions:
           path: readings/{sensor_id}/{published_at}
           method: get
           cors: true
+          parameters:
+            paths:
+              sensor_id: true
+              published_at: true
 
   readSince:
     handler: handler.readSince
