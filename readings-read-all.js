@@ -7,7 +7,7 @@ module.exports = (event, callback) => {
 
 console.log("Event: " + JSON.stringify(event));
 
-var sensor;
+var sensor_id;
 var params;
 var start_timestamp;
 var end_timestamp;
@@ -23,7 +23,7 @@ var table = 'readings';
     {
     	// sensor_id is provided
       console.log("Received sensor_id: " + event.queryStringParameters.sensor_id);
-      sensor = event.queryStringParameters.sensor_id;
+      sensor_id = event.queryStringParameters.sensor_id;
 
       if (event.queryStringParameters.start_timestamp !== undefined && 
         event.queryStringParameters.start_timestamp !== null && 
@@ -44,16 +44,16 @@ var table = 'readings';
 	        params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"#sensor_id = :sensor and #published_at BETWEEN :start_timestamp AND :end_timestamp",
+	          KeyConditionExpression:"#sensor_id = :sensor_id and #published_at BETWEEN :start_timestamp AND :end_timestamp",
         	  ExpressionAttributeNames: {
             	"#sensor_id":"sensor_id",
             	"#start_timestamp":"start_timestamp",
             	"#end_timestamp":"end_timestamp"
             	},
               ExpressionAttributeValues: {
-            	":sensor":sensor,
-            	":start":parseInt(start_timestamp),
-            	":end":parseInt(end_timestamp)
+            	":sensor_id":sensor_id,
+            	":start_timestamp":parseInt(start_timestamp),
+            	":end_timestamp":parseInt(end_timestamp)
             	}    
 	        };
       	}
@@ -65,16 +65,16 @@ var table = 'readings';
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"#sensor_id = :sensor and #published_at BETWEEN :start_timestamp AND :end_timestamp",
+	          KeyConditionExpression:"#sensor_id = :sensor_id and #published_at BETWEEN :start_timestamp AND :end_timestamp",
         	  ExpressionAttributeNames: {
             	"#sensor_id":"sensor_id",
             	"#start_timestamp":"start_timestamp",
             	"#end_timestamp":"end_timestamp"
             	},
               ExpressionAttributeValues: {
-            	":sensor":sensor,
-            	":start":parseInt(start_timestamp),
-            	":end":Date.now()
+            	":sensor_id":sensor_id,
+            	":start_timestamp":parseInt(start_timestamp),
+            	":end_timestamp":Date.now()
             	}    
 	        };
       	}
@@ -87,12 +87,12 @@ var table = 'readings';
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"#sensor_id = :sensor",
+	          KeyConditionExpression:"#sensor_id = :sensor_id",
         	  ExpressionAttributeNames: {
             	"#sensor_id":"sensor_id"
             	},
               ExpressionAttributeValues: {
-            	":sensor":sensor
+            	":sensor_id":sensor_id
             	}    
 	        };
       }
