@@ -3,7 +3,7 @@
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-var table = "readings";
+var table = 'readings';
 var params;
 var sensor_id;
 var published_at;
