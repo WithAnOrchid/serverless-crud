@@ -3,25 +3,37 @@
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+var table = "readings";
+var params;
+var sensor_id;
+var published_at;
+
+
 module.exports = (event, callback) => {
   console.log("Event: " + JSON.stringify(event));
-  var params;
-  var sensor_id;
-  var published_at;
-  
-  if (event.queryStringParameters !== null && event.queryStringParameters !== undefined) {
-    if (event.queryStringParameters.sensor_id !== undefined && event.queryStringParameters.sensor_id !== null && event.queryStringParameters.name !== "") {
+
+  if (event.queryStringParameters !== null && 
+      event.queryStringParameters !== undefined) 
+  {
+    if (event.queryStringParameters.sensor_id !== undefined && 
+        event.queryStringParameters.sensor_id !== null && 
+        event.queryStringParameters.name !== "") 
+    {
       console.log("Received sensor_id: " + event.queryStringParameters.sensor_id);
       sensor_id = event.queryStringParameters.sensor_id;
-      if (event.queryStringParameters.published_at !== undefined && event.queryStringParameters.published_at !== null && event.queryStringParameters.published_at !== "") {
+
+      if (event.queryStringParameters.published_at !== undefined && 
+        event.queryStringParameters.published_at !== null && 
+        event.queryStringParameters.published_at !== "") 
+      {
         console.log("Received http published_at: " + event.queryStringParameters.published_at);
         published_at = event.queryStringParameters.published_at;
 
         params = {
-          TableName: 'readings',
+          TableName: table,
           Key: {
-            sensor_id: sensor_id ,
-            published_at: published_at
+            "sensor_id": sensor_id ,
+            "published_at": published_at
           }    
         };
       }
