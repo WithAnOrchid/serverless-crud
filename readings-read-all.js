@@ -9,7 +9,7 @@ console.log("Event: " + JSON.stringify(event));
 
 var sensor;
 var params;
-var from_timestamp;
+var start_timestamp;
 var end_timestamp;
 var table = 'readings';
 
