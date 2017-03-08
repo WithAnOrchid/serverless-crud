@@ -25,21 +25,21 @@ var table = 'readings';
       console.log("Received sensor_id: " + event.queryStringParameters.sensor_id);
       sensor = event.queryStringParameters.sensor_id;
 
-      if (event.queryStringParameters.start !== undefined && 
-        event.queryStringParameters.start !== null && 
-        event.queryStringParameters.start !== "") 
+      if (event.queryStringParameters.start_timestamp !== undefined && 
+        event.queryStringParameters.start_timestamp !== null && 
+        event.queryStringParameters.start_timestamp !== "") 
       {
       	// start is provided 
-        console.log("Received start_timestamp: " + event.queryStringParameters.start);
-        start_timestamp = event.queryStringParameters.start;
+        console.log("Received start_timestamp: " + event.queryStringParameters.start_timestamp);
+        start_timestamp = event.queryStringParameters.start_timestamp;
 
-        if (event.queryStringParameters.end !== undefined && 
-        	event.queryStringParameters.end !== null && 
-        	event.queryStringParameters.end !== "") 
+        if (event.queryStringParameters.end_timestamp !== undefined && 
+        	event.queryStringParameters.end_timestamp !== null && 
+        	event.queryStringParameters.end_timestamp !== "") 
       	{
       		// all info is provided
-        	console.log("Received end_timestamp: " + event.queryStringParameters.end);
-        	end_timestamp = event.queryStringParameters.end;
+        	console.log("Received end_timestamp: " + event.queryStringParameters.end_timestamp);
+        	end_timestamp = event.queryStringParameters.end_timestamp;
 
 	        params = {
 	          TableName: table,
