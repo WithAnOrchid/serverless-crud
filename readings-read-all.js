@@ -52,15 +52,16 @@ var table = 'readings';
             	},
               ExpressionAttributeValues: {
             	":sensor":sensor,
-            	":start":start_timestamp,
-            	":end":end_timestamp
+            	":start":parseInt(start_timestamp),
+            	":end":parseInt(end_timestamp)
             	}    
 	        };
       	}
       	else
       	{
       		// have sensor_id, start_timestamp, end_timestamp not given
-      		console.log("have sensor_id, start_timestamp, end_timestamp not given ");
+      		console.log("have sensor_id, start_timestamp, but end_timestamp not given ");
+
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
@@ -72,7 +73,7 @@ var table = 'readings';
             	},
               ExpressionAttributeValues: {
             	":sensor":sensor,
-            	":start":start_timestamp,
+            	":start":parseInt(start_timestamp),
             	":end":Date.now()
             	}    
 	        };
