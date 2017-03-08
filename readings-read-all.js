@@ -11,6 +11,7 @@ var sensor;
 var params;
 var from_timestamp;
 var end_timestamp;
+var table = 'readings';
 
   if (event.queryStringParameters !== null && 
       event.queryStringParameters !== undefined) 
@@ -103,6 +104,13 @@ var end_timestamp;
       		TableName: 'readings',
       		ConsistentRead: true   
     	};
+
+    	return dynamoDb.scan(params, (error, data) => {
+    	if (error) {
+      	callback(error);
+    	}
+    	callback(error, data);
+  		});
     }
 
   }
@@ -110,10 +118,18 @@ var end_timestamp;
   {
   	// we got nothing from URL
   	console.log("we got nothing from URL");
+
     params = {
       TableName: 'readings',
       ConsistentRead: true    
     };
+
+    return dynamoDb.scan(params, (error, data) => {
+    if (error) {
+      callback(error);
+    }
+    callback(error, data);
+  });
   }//end of URL parameters validation
 
   console.log('params is ' + JSON.stringify(params));
