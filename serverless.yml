@@ -15,7 +15,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:ap-southeast-1:*:*"
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
   create:
@@ -25,14 +25,18 @@ functions:
           path: readings
           method: post
           cors: true
-
   readAll:
     handler: handler.readAll
-    memory: 512
-    timeout: 10
     events:
       - http:
           path: readings
+          method: get
+          cors: true
+  readOne:
+    handler: handler.readOne
+    events:
+      - http:
+          path: readings/{id}
           method: get
           cors: true
 
@@ -40,7 +44,7 @@ functions:
     handler: handler.readSince
     events:
       - http:
-          path: readings/{sensor_id}/{published_at}
+          path: readings/{id}
           method: get
           cors: true
 
@@ -48,14 +52,14 @@ functions:
     handler: handler.update
     events:
       - http:
-          path: readings/{sensor_id}/{published_at}
+          path: readings/{id}
           method: put
           cors: true
   delete:
     handler: handler.delete
     events:
       - http:
-          path: readings/{sensor_id}/{published_at}
+          path: readings/{id}
           method: delete
           cors: true
 
@@ -81,6 +85,6 @@ resources:
             AttributeName: published_at
             KeyType: RANGE
         ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
         TableName: 'readings'

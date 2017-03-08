@@ -13,7 +13,7 @@ module.exports = (event, callback) => {
 
   const params = {
     TableName: 'readings',
-    Item: JSON.stringify(data)
+    Item: data
   };
 
   return dynamoDb.put(params, (error, data) => {
