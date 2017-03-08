@@ -3,6 +3,8 @@
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+module.exports = (event, callback) => {
+
 var sensor;
 var params;
 var from_timestamp;
@@ -106,9 +108,8 @@ var end_timestamp;
       TableName: 'readings',
       ConsistentRead: true    
     };
-  } 
-
-module.exports = (event, callback) => {
+  }//end of URL parameters validation
+	
   console.log('params is ' + JSON.stringify(params));
 
   return dynamoDb.query(params, (error, data) => {
