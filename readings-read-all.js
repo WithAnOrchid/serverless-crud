@@ -12,6 +12,7 @@ module.exports = (event, callback) => {
   };
 
   return dynamoDb.scan(params, (error, data) => {
+  	console.log('Data is ' + JSON.stringify(data));
     if (error) {
       callback(error);
     }
