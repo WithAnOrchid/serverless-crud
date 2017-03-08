@@ -5,6 +5,8 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports = (event, callback) => {
 
+console.log("Event: " + JSON.stringify(event));
+
 var sensor;
 var params;
 var from_timestamp;
@@ -57,6 +59,7 @@ var end_timestamp;
       	else
       	{
       		// have sensor_id, start_timestamp, end_timestamp not given
+      		console.log("have sensor_id, start_timestamp, end_timestamp not given ");
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
@@ -77,7 +80,8 @@ var end_timestamp;
       }
       else
       {
-      	// has sensor_id, no start_timestamp
+      	// have sensor_id, no start_timestamp
+      	console.log("have sensor_id, no start_timestamp");
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
@@ -94,6 +98,7 @@ var end_timestamp;
     else
     {
     	// no sensor_id
+    	console.log("no sensor_id");
     	params = {
       		TableName: 'readings',
       		ConsistentRead: true   
@@ -104,12 +109,13 @@ var end_timestamp;
   else
   {
   	// we got nothing from URL
+  	console.log("we got nothing from URL");
     params = {
       TableName: 'readings',
       ConsistentRead: true    
     };
   }//end of URL parameters validation
-	
+
   console.log('params is ' + JSON.stringify(params));
 
   return dynamoDb.query(params, (error, data) => {
