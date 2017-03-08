@@ -33,14 +33,6 @@ functions:
           method: get
           cors: true
 
-  readSince:
-    handler: handler.readSince
-    events:
-      - http:
-          path: readings/{published_at}
-          method: get
-          cors: true
-
   update:
     handler: handler.update
     events:
