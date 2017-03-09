@@ -45,15 +45,10 @@ var table = 'readings';
 	          TableName: table,
 	          ConsistentRead: true,
 	          KeyConditionExpression:"#sensor_id = :sensor_id and #published_at BETWEEN :start_timestamp AND :end_timestamp",
-        	  ExpressionAttributeNames: {
-            	"#sensor_id":"sensor_id",
-            	"#start_timestamp":"start_timestamp",
-            	"#end_timestamp":"end_timestamp"
-            	},
               ExpressionAttributeValues: {
             	":sensor_id":sensor_id,
-            	":start_timestamp":parseInt(start_timestamp),
-            	":end_timestamp":parseInt(end_timestamp)
+            	":start_timestamp": start_timestamp,
+            	":end_timestamp": end_timestamp
             	}    
 	        };
       	}
@@ -61,20 +56,15 @@ var table = 'readings';
       	{
       		// have sensor_id, start_timestamp, end_timestamp not given
       		console.log("have sensor_id, start_timestamp, but end_timestamp not given ");
-
+      		var currTime = Date.now().toString();
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
 	          KeyConditionExpression:"#sensor_id = :sensor_id and #published_at BETWEEN :start_timestamp AND :end_timestamp",
-        	  ExpressionAttributeNames: {
-            	"#sensor_id":"sensor_id",
-            	"#start_timestamp":"start_timestamp",
-            	"#end_timestamp":"end_timestamp"
-            	},
               ExpressionAttributeValues: {
             	":sensor_id":sensor_id,
-            	":start_timestamp":parseInt(start_timestamp),
-            	":end_timestamp":Date.now()
+            	":start_timestamp":start_timestamp,
+            	":end_timestamp": currTime
             	}    
 	        };
       	}
@@ -88,9 +78,6 @@ var table = 'readings';
 	          TableName: table,
 	          ConsistentRead: true,
 	          KeyConditionExpression:"#sensor_id = :sensor_id",
-        	  ExpressionAttributeNames: {
-            	"#sensor_id":"sensor_id"
-            	},
               ExpressionAttributeValues: {
             	":sensor_id":sensor_id
             	}    
