@@ -94,6 +94,7 @@ var table = "readings";
             	":sensor_id": {
             		"S" : sensor_id
             	},
+            }
 	        };
       }
     }
