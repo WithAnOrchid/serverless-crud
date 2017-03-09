@@ -31,7 +31,7 @@ var table = "readings";
       {
       	// start is provided 
         console.log("Received start_timestamp: " + event.queryStringParameters.start_timestamp);
-        start_timestamp = event.queryStringParameters.start_timestamp;
+        start_timestamp = parseInt(event.queryStringParameters.start_timestamp);
 
         if (event.queryStringParameters.end_timestamp !== undefined && 
         	event.queryStringParameters.end_timestamp !== null && 
@@ -39,7 +39,7 @@ var table = "readings";
       	{
       		// all info is provided
         	console.log("Received end_timestamp: " + event.queryStringParameters.end_timestamp);
-        	end_timestamp = event.queryStringParameters.end_timestamp;
+        	end_timestamp = parseInt(event.queryStringParameters.end_timestamp);
 
 	        params = {
 	          TableName: table,
@@ -56,7 +56,7 @@ var table = "readings";
       	{
       		// have sensor_id, start_timestamp, end_timestamp not given
       		console.log("have sensor_id, start_timestamp, but end_timestamp not given ");
-      		var currTime = Date.now().toString();
+      		var currTime = Date.now();
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
