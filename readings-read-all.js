@@ -11,7 +11,7 @@ var sensor_id;
 var params;
 var start_timestamp;
 var end_timestamp;
-var table = 'readings';
+var table = "readings";
 
   if (event.queryStringParameters !== null && 
       event.queryStringParameters !== undefined) 
@@ -44,11 +44,17 @@ var table = 'readings';
 	        params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"#sensor_id = :sensor_id and #published_at BETWEEN :start_timestamp AND :end_timestamp",
+	          KeyConditionExpression:"sensor_id = :sensor_id and published_at BETWEEN :start_timestamp AND :end_timestamp",
               ExpressionAttributeValues: {
-            	":sensor_id":sensor_id,
-            	":start_timestamp": start_timestamp,
-            	":end_timestamp": end_timestamp
+            	":sensor_id": {
+            		"S" : sensor_id
+            	},
+            	":start_timestamp": {
+            		"N" : start_timestamp
+            	},
+            	":end_timestamp": {
+            		"N": end_timestamp
+            	},
             	}    
 	        };
       	}
@@ -60,11 +66,17 @@ var table = 'readings';
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"#sensor_id = :sensor_id and #published_at BETWEEN :start_timestamp AND :end_timestamp",
+	          KeyConditionExpression:"sensor_id = :sensor_id and published_at BETWEEN :start_timestamp AND :end_timestamp",
               ExpressionAttributeValues: {
-            	":sensor_id":sensor_id,
-            	":start_timestamp":start_timestamp,
-            	":end_timestamp": currTime
+            	":sensor_id": {
+            		"S" : sensor_id
+            	},
+            	":start_timestamp": {
+            		"N" : start_timestamp
+            	},
+            	":end_timestamp": {
+            		"N": currTime
+            	},
             	}    
 	        };
       	}
@@ -77,10 +89,11 @@ var table = 'readings';
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"#sensor_id = :sensor_id",
+	          KeyConditionExpression:"sensor_id = :sensor_id",
               ExpressionAttributeValues: {
-            	":sensor_id":sensor_id
-            	}    
+            	":sensor_id": {
+            		"S" : sensor_id
+            	},
 	        };
       }
     }
@@ -108,7 +121,7 @@ var table = 'readings';
   	console.log("we got nothing from URL");
 
     params = {
-      TableName: 'readings',
+      TableName: table,
       ConsistentRead: true    
     };
 
