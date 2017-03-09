@@ -46,15 +46,9 @@ var table = "readings";
 	          ConsistentRead: true,
 	          KeyConditionExpression:"sensor_id = :sensor_id and published_at BETWEEN :start_timestamp AND :end_timestamp",
               ExpressionAttributeValues: {
-            	":sensor_id": {
-            		"S" : sensor_id
-            	},
-            	":start_timestamp": {
-            		"N" : start_timestamp
-            	},
-            	":end_timestamp": {
-            		"N": end_timestamp
-            	},
+            	":sensor_id": sensor_id,
+            	":start_timestamp": start_timestamp,
+            	":end_timestamp": end_timestamp
             	}    
 	        };
       	}
@@ -68,15 +62,9 @@ var table = "readings";
 	          ConsistentRead: true,
 	          KeyConditionExpression:"sensor_id = :sensor_id and published_at BETWEEN :start_timestamp AND :end_timestamp",
               ExpressionAttributeValues: {
-            	":sensor_id": {
-            		"S" : sensor_id
-            	},
-            	":start_timestamp": {
-            		"N" : start_timestamp
-            	},
-            	":end_timestamp": {
-            		"N": currTime
-            	},
+            	":sensor_id": sensor_id,
+            	":start_timestamp": start_timestamp,
+            	":end_timestamp": currTime
             	}    
 	        };
       	}
@@ -91,9 +79,7 @@ var table = "readings";
 	          ConsistentRead: true,
 	          KeyConditionExpression:"sensor_id = :sensor_id",
               ExpressionAttributeValues: {
-            	":sensor_id": {
-            		"S" : sensor_id
-            	},
+            	":sensor_id": sensor_id
             }
 	        };
       }
