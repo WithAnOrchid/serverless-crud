@@ -44,7 +44,7 @@ var table = "readings";
 	        params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"sensor_id = :sensor_id and published_at BETWEEN :start_timestamp AND :end_timestamp",
+	          KeyConditionExpression:"sensor_id = :sensor_id AND published_at BETWEEN :start_timestamp AND :end_timestamp",
               ExpressionAttributeValues: {
             	":sensor_id": sensor_id,
             	":start_timestamp": start_timestamp,
@@ -60,7 +60,7 @@ var table = "readings";
       		params = {
 	          TableName: table,
 	          ConsistentRead: true,
-	          KeyConditionExpression:"sensor_id = :sensor_id and published_at BETWEEN :start_timestamp AND :end_timestamp",
+	          KeyConditionExpression:"sensor_id = :sensor_id AND published_at BETWEEN :start_timestamp AND :end_timestamp",
               ExpressionAttributeValues: {
             	":sensor_id": sensor_id,
             	":start_timestamp": start_timestamp,
