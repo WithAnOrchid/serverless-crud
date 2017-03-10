@@ -37,14 +37,22 @@ functions:
     handler: handler.update
     events:
       - http:
+<<<<<<< HEAD
           path: readings/modify
+=======
+          path: readings
+>>>>>>> 1bb88ec56ffca23d44c4acc38dc9a926524b0ed9
           method: put
           cors: true
   delete:
     handler: handler.delete
     events:
       - http:
+<<<<<<< HEAD
           path: readings/modify
+=======
+          path: readings
+>>>>>>> 1bb88ec56ffca23d44c4acc38dc9a926524b0ed9
           method: delete
           cors: true
 
