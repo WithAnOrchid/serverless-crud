@@ -37,14 +37,14 @@ functions:
     handler: handler.update
     events:
       - http:
-          path: readings/{id}
+          path: readings/modify
           method: put
           cors: true
   delete:
     handler: handler.delete
     events:
       - http:
-          path: readings/{id}
+          path: readings/modify
           method: delete
           cors: true
 
@@ -70,6 +70,6 @@ resources:
             AttributeName: published_at
             KeyType: RANGE
         ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
         TableName: 'readings'
