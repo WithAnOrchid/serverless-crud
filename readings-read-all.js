@@ -13,6 +13,7 @@ module.exports = (event, callback) => {
   var last_sensor_id;
   var last_published_at;
   var limit;
+  var scan_forward;
 
   var has_parameters = false;
   var has_sensor_id = false;
@@ -21,6 +22,7 @@ module.exports = (event, callback) => {
   var has_last_sensor_id = false;
   var has_last_published_at = false;
   var has_limit = false;
+  var has_scan_forward = false;
 
   var table = "readings";
   var params;
@@ -70,6 +72,13 @@ module.exports = (event, callback) => {
     {
       has_limit = true;
       limit = parseInt(event.queryStringParameters.limit);
+    }
+    if (event.queryStringParameters.scan_forward !== undefined && 
+      event.queryStringParameters.scan_forward !== null && 
+      event.queryStringParameters.scan_forward !== "") 
+    {
+      has_scan_forward = true;
+      scan_forward = event.queryStringParameters.scan_forward;
     }
 
   }
@@ -157,6 +166,12 @@ if(has_last_sensor_id && has_last_published_at)
 if(has_limit)
 {
   params.Limit = limit;
+}
+
+
+if(has_scan_forward)
+{
+  params.ScanIndexForward = scan_forward;
 }
 
 // determin call scan or query
