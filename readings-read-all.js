@@ -62,7 +62,7 @@ module.exports = (event, callback) => {
       event.queryStringParameters.last_published_at !== "") 
     {
       has_last_published_at = true;
-      last_published_at = event.queryStringParameters.last_published_at;
+      last_published_at = parseInt(event.queryStringParameters.last_published_at);
     }
     if (event.queryStringParameters.limit !== undefined && 
       event.queryStringParameters.limit !== null && 
@@ -171,6 +171,7 @@ if(!has_parameters || !has_sensor_id)
 }
 else
 {
+  console.log(params);
   return dynamoDb.query(params, (error, data) => {
     if (error) {
       callback(error);
