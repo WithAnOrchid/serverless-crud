@@ -35,7 +35,7 @@ module.exports = (event, callback) => {
 			event.queryStringParameters.published_at !== "") 
 		{
 			has_published_at = true;
-			published_at = parseInt(event.queryStringParameters.last_published_at);
+			published_at = parseInt(event.queryStringParameters.published_at);
 		}
 		if (event.queryStringParameters.limit !== undefined && 
 			event.queryStringParameters.limit !== null && 
