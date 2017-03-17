@@ -89,8 +89,7 @@ module.exports = (event, callback) => {
 			// no sensor_id
 			params = {
 				TableName: table,
-				ConsistentRead: true,
-				ScanIndexForward: false
+				ConsistentRead: true
 			};
 		}
 	}
@@ -99,8 +98,7 @@ module.exports = (event, callback) => {
 		// no params
 		params = {
 			TableName: table,
-			ConsistentRead: true,
-			ScanIndexForward: false
+			ConsistentRead: true
 		};
 	}// end of all if-else block
 
@@ -114,9 +112,9 @@ if(has_limit)
 console.log("Params: " + JSON.stringify(params));
 
 // determin call scan or query
-if(has_parameters && has_sensor_id && has_published_at)
+if(!has_sensor_id)
 {
-	return dynamoDb.query(params, (error, data) => {
+	return dynamoDb.scan(params, (error, data) => {
 		if (error) {
 			callback(error);
 		}
@@ -125,11 +123,12 @@ if(has_parameters && has_sensor_id && has_published_at)
 }
 else
 {
-	return dynamoDb.scan(params, (error, data) => {
+	return dynamoDb.query(params, (error, data) => {
 		if (error) {
 			callback(error);
 		}
 		callback(error, data);
 	});
+
 }
 };

@@ -175,7 +175,7 @@ if(has_scan_forward)
 }
 
 // determin call scan or query
-if(!has_parameters || !has_sensor_id)
+if(!has_sensor_id)
 {
   return dynamoDb.scan(params, (error, data) => {
     if (error) {
