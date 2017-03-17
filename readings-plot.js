@@ -127,6 +127,15 @@ else
 		if (error) {
 			callback(error);
 		}
+		else
+		{
+			if(!has_published_at)
+			{
+				data.Items.sort(function(a, b){
+					return parseInt(a.published_at) - parseInt(b.published_at);
+				}); 
+			}
+		}
 		callback(error, data);
 	});
 
