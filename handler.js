@@ -4,6 +4,7 @@ const readingsCreate = require('./readings-create.js');
 const readingsReadAll = require('./readings-read-all.js');
 const readingsUpdate = require('./readings-update.js');
 const readingsDelete = require('./readings-delete.js');
+const readingsPlot = require('./readings-plot.js');
 
 module.exports.create = (event, context, callback) => {
   readingsCreate(event, (error, result) => {
@@ -49,6 +50,20 @@ module.exports.update = (event, context, callback) => {
 
 module.exports.delete = (event, context, callback) => {
   readingsDelete(event, (error, result) => {
+    const response = {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*"
+      },
+      body: JSON.stringify(result),
+    };
+
+    context.succeed(response);
+  });
+};
+
+module.exports.plot = (event, context, callback) => {
+  readingsPlot(event, (error, result) => {
     const response = {
       statusCode: 200,
       headers: {
