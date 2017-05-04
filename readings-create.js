@@ -28,6 +28,10 @@ module.exports = (event, callback) => {
       }
     };
 
+    var PMV = 0.0;
+    var APMV = 0.0;
+    var PPD = 0.0;
+
     lambda.invoke({
       FunctionName: 'pmv-dev-computePMV',
     Payload: JSON.stringify(event, null, 2) // pass params
@@ -40,9 +44,9 @@ module.exports = (event, callback) => {
         //context.succeed(data.Payload)
         const temp = JSON.parse(data.Payload);
         const result = JSON.parse(temp.body);
-        const PMV = result.PMV;
-        const APMV = result.apmv;
-        const PPD = result.ppd;
+        PMV = result.PMV;
+        APMV = result.apmv;
+        PPD = result.ppd;
       }
     });
 
