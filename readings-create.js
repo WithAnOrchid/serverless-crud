@@ -23,11 +23,11 @@ module.exports = (event, callback) => {
   });
     const event = {
       "queryStringParameters": {
-        "rh": data.temperature_reading,
-        "ta": data.humidity_reading
+        "rh": parseFloat(data.temperature_reading),
+        "ta": parseFloat(data.humidity_reading)
       }
     };
-
+    console.log(event);
     var PMV = 0.0;
     var APMV = 0.0;
     var PPD = 0.0;
@@ -44,9 +44,10 @@ module.exports = (event, callback) => {
         //context.succeed(data.Payload)
         const temp = JSON.parse(data.Payload);
         const result = JSON.parse(temp.body);
-        PMV = result.PMV;
-        APMV = result.apmv;
-        PPD = result.ppd;
+        PMV = parseFloat(result.PMV);
+        APMV = parseFloat(result.apmv);
+        PPD = parseFloat(result.ppd);
+        console.log(result);
       }
     });
 
