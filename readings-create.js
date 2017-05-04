@@ -38,9 +38,11 @@ module.exports = (event, callback) => {
   }, function(error, data) {
     if (error) {
         //context.done('error', error);
+        console.log("in error");
         console.log(error);
       }
       if(data.Payload){
+        console.log("in succeed");
         //context.succeed(data.Payload)
         const temp = JSON.parse(data.Payload);
         const result = JSON.parse(temp.body);
