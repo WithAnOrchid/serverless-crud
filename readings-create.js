@@ -35,31 +35,35 @@ module.exports = (event, callback) => {
     lambda.invoke({
       FunctionName: 'pmv-dev-computePMV',
     Payload: JSON.stringify(event, null, 2) // pass params
-  }, function(error, data) {
+  }, function(error, data2) {
     if (error) {
         //context.done('error', error);
         console.log("in error");
         console.log(error);
       }
-      if(data.Payload){
+      if(data2.Payload){
         console.log("in succeed");
         //context.succeed(data.Payload)
-        const temp = JSON.parse(data.Payload);
+        const temp = JSON.parse(data2.Payload);
         const result = JSON.parse(temp.body);
         PMV = parseFloat(result.PMV);
         APMV = parseFloat(result.APMV);
         PPD = parseFloat(result.PPD);
         console.log(result);
+      }
+    });
 
-            // Split the single JSON to 2 JSONs
+    
+
+    // Split the single JSON to 2 JSONs
     var data1 = {
       sensor_id: 'TEMPERATURE-' + data.sensor_id,
       device_id: data.device_id,
       device_type: data.device_type,
       sensor_type: 'temperature',
       sensor_reading: data.temperature_reading,
-      published_at: Date.now(),
-      processed_at: Date.now()
+      published_at: data.published_at,
+      processed_at: data.processed_at
     };
     var data2 = {
       sensor_id: 'HUMIDITY-' + data.sensor_id,
@@ -67,8 +71,8 @@ module.exports = (event, callback) => {
       device_type: data.device_type,
       sensor_type: 'humidity',
       sensor_reading: data.humidity_reading,
-      published_at: Date.now(),
-      processed_at: Date.now()
+      published_at: data.published_at,
+      processed_at: data.processed_at
     };
 
     var data3 = {
@@ -79,8 +83,8 @@ module.exports = (event, callback) => {
       pmv: PMV,
       apmv: APMV,
       ppd: PPD,
-      published_at: Date.now(),
-      processed_at: Date.now()
+      published_at: data.published_at,
+      processed_at: data.processed_at
     };
     
     var params1 = {
@@ -115,12 +119,6 @@ module.exports = (event, callback) => {
       }
       callback(error, params3.Item);
     });
-      }
-    });
-
-    
-
-
     
     
 
