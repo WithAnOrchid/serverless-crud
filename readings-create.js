@@ -50,12 +50,9 @@ module.exports = (event, callback) => {
         APMV = parseFloat(result.APMV);
         PPD = parseFloat(result.PPD);
         console.log(result);
-      }
-    });
 
-    
 
-    // Split the single JSON to 2 JSONs
+            // Split the single JSON to 2 JSONs
     var data1 = {
       sensor_id: 'TEMPERATURE-' + data.sensor_id,
       device_id: data.device_id,
@@ -119,6 +116,9 @@ module.exports = (event, callback) => {
       }
       callback(error, params3.Item);
     });
+      }
+    });
+
     
     
 
