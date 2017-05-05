@@ -58,8 +58,8 @@ module.exports = (event, callback) => {
       device_type: data.device_type,
       sensor_type: 'temperature',
       sensor_reading: data.temperature_reading,
-      published_at: data.published_at,
-      processed_at: data.processed_at
+      published_at: Date.now(),
+      processed_at: Date.now()
     };
     var data2 = {
       sensor_id: 'HUMIDITY-' + data.sensor_id,
@@ -67,8 +67,8 @@ module.exports = (event, callback) => {
       device_type: data.device_type,
       sensor_type: 'humidity',
       sensor_reading: data.humidity_reading,
-      published_at: data.published_at,
-      processed_at: data.processed_at
+      published_at: Date.now(),
+      processed_at: Date.now()
     };
 
     var data3 = {
@@ -79,8 +79,8 @@ module.exports = (event, callback) => {
       pmv: PMV,
       apmv: APMV,
       ppd: PPD,
-      published_at: data.published_at,
-      processed_at: data.processed_at
+      published_at: Date.now(),
+      processed_at: Date.now()
     };
     
     var params1 = {
