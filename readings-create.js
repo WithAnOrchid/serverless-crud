@@ -23,8 +23,8 @@ module.exports = (event, callback) => {
   });
     const event = {
       "queryStringParameters": {
-        "rh": parseFloat(data.temperature_reading),
-        "ta": parseFloat(data.humidity_reading)
+        "rh": parseFloat(data.humidity_reading),
+        "ta": parseFloat(data.temperature_reading)
       }
     };
     console.log(event);
