@@ -77,11 +77,29 @@ module.exports = (event, callback) => {
       device_id: data.device_id,
       device_type: data.device_type,
       sensor_type: 'PMV_NOT_A_SENSOR',
-      pmv: PMV,
-      apmv: APMV,
-      ppd: PPD,
+      sensor_reading: PMV,
       published_at: data.published_at,
-      processed_at: data.processed_at
+      processed_at: Date.now()
+    };
+
+    var data4 = {
+      sensor_id: 'APMV-' + data.sensor_id,
+      device_id: data.device_id,
+      device_type: data.device_type,
+      sensor_type: 'APMV_NOT_A_SENSOR',
+      sensor_reading: APMV,
+      published_at: data.published_at,
+      processed_at: Date.now()
+    };
+
+    var data5 = {
+      sensor_id: 'PPD-' + data.sensor_id,
+      device_id: data.device_id,
+      device_type: data.device_type,
+      sensor_type: 'PPD_NOT_A_SENSOR',
+      sensor_reading: PPD,
+      published_at: data.published_at,
+      processed_at: Date.now()
     };
     
     var params1 = {
@@ -97,6 +115,16 @@ module.exports = (event, callback) => {
       TableName: 'readings',
       Item: data3
     };
+
+    var params3 = {
+      TableName: 'readings',
+      Item: data4
+    };
+
+    var params3 = {
+      TableName: 'readings',
+      Item: data5
+    };
     
     dynamoDb.put(params1, function(err, data) {
       if (err) console.log("Unable to update item. Error: ", JSON.stringify(err, null, 2));
@@ -110,11 +138,23 @@ module.exports = (event, callback) => {
             //next() // modify for err handling
           });
 
-    return dynamoDb.put(params3, (error, data) => {
+    dynamoDb.put(params3, function(err, data) {
+      if (err) console.log("Unable to update item. Error: ", JSON.stringify(err, null, 2));
+      else console.log("Updated item succeeded: ", JSON.stringify(data, null, 2));
+            //next() // modify for err handling
+          });
+
+    dynamoDb.put(params4, function(err, data) {
+      if (err) console.log("Unable to update item. Error: ", JSON.stringify(err, null, 2));
+      else console.log("Updated item succeeded: ", JSON.stringify(data, null, 2));
+            //next() // modify for err handling
+          });
+
+    return dynamoDb.put(params5, (error, data) => {
       if (error) {
         callback(error);
       }
-      callback(error, params3.Item);
+      callback(error, params5.Item);
     });
       }
     });
