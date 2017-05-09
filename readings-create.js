@@ -116,12 +116,12 @@ module.exports = (event, callback) => {
       Item: data3
     };
 
-    var params3 = {
+    var params4 = {
       TableName: 'readings',
       Item: data4
     };
 
-    var params3 = {
+    var params5 = {
       TableName: 'readings',
       Item: data5
     };
